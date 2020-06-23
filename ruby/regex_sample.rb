@@ -28,23 +28,23 @@ end
 thrice_i(txt)
 # 3.Print out the 3rd word of each sentence from a list of sentences.
 
-# read file
-
-def cats_and(txt)
-  puts 'Check whether the letter i occurs three or more times in Mississippi.'
-  if txt =~ /(cat|dog)/i
-    puts 'true'
-  else
-    puts 'false'
-  end
+# read file line by line
+def read_file(name)
+  puts File.join(File.dirname(__FILE__), "/#{name}")
+  file = File.open(File.join(File.dirname(__FILE__), "/#{name}"))
+  file_data = file.readlines.map(&:chomp)
+  file_data
 end
+# save third character in array
 
-cat = 'The lazy Cat.'
-dog = 'The dog barks.'
-cats_and_dogs = 'The lazy cat, chased by the barking dog'
-
-cats_and(cat)
-
-cats_and(dog)
-
-cats_and(cats_and_dogs)
+def find_3rd(file_name)
+  ans = []
+  lines = read_file(file_name.chomp)
+  lines.each do |item|
+    st = item.split(/ /) # use regex to identify space and split into array , split(/\s/)
+    ans << st[2]
+  end
+  ans
+end
+# print array
+puts find_3rd('sample.txt')
